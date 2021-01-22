@@ -26,6 +26,9 @@ class _SignInState extends State<SignIn> {
 
   String email;
   String password;
+  String error;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 
 
@@ -36,8 +39,14 @@ class _SignInState extends State<SignIn> {
       'sign in ',
       () async
       {
-        print(email);
-        print(password);
+        if(formKey.currentState.validate())
+        {
+          dynamic result = await _authService.signInWithEmail(email, password);
+          if(result == null)
+          {
+            setState(() => error = ' fail to sign in');
+          }
+        }
       }
     );
   }
@@ -49,8 +58,14 @@ class _SignInState extends State<SignIn> {
         'Register',
             () async
         {
-          print(email);
-          print(password);
+          if(formKey.currentState.validate())
+          {
+            dynamic result = await _authService.registerWithEmail(email, password);
+            if(result == null)
+              {
+                setState(() => error = 'please supply a vaild email');
+              }
+          }
         }
     );
   }
@@ -90,12 +105,14 @@ class _SignInState extends State<SignIn> {
           padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 50.0),
           child: Form
             (
+                key: formKey,
                 child: Column
                 (
                   children: <Widget>
                   [
                     SizedBox(height: 20),
                     TextFormField(
+                      validator: (val)=> val.isEmpty ? 'Enter an email': null,
                       onChanged: (val)
                       {
                         setState(() => email = val);
@@ -104,6 +121,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 20),
                     TextFormField(
                       obscureText: true,
+                      validator: (val)=> val.length < 6 ? 'Enter an password length that 6 char long': null,
                       onChanged: (val)
                       {
                         setState(() => password = val);
@@ -113,6 +131,13 @@ class _SignInState extends State<SignIn> {
                     createSignInButton(),
                     createRegisterButton(),
                     createSignInAnnaButton(),
+                    SizedBox(height: 20),
+                    //... so to do the if  check inside constructor ?? (yes it magic for me)
+                    if(error !=null)...
+                    {
+                      Text(error,
+                          style: TextStyle(color: Colors.red, fontSize: 14)),
+                    }
 
 
                   ],
