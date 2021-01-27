@@ -70,13 +70,13 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Widget createSignInAnnaButton()
+  Widget createSignInGoogleButton()
   {
     return createRaisedButtonHelper
       (
-       'sign in anna', () async
+       'sign in with google', () async
         {
-          dynamic result = await _authService.signInAnon();
+          dynamic result = await _authService.signInWithGoogle();
           if(result == null)
           print('error sign in');
           else
@@ -130,7 +130,7 @@ class _SignInState extends State<SignIn> {
                     SizedBox(height: 20),
                     createSignInButton(),
                     createRegisterButton(),
-                    createSignInAnnaButton(),
+                    createSignInGoogleButton(),
                     SizedBox(height: 20),
                     //... so to do the if  check inside constructor ?? (yes it magic for me)
                     if(error !=null)...

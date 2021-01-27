@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:928501592567:android:cf0271c518df0dfa73fef2",
+        "android_client_info": {
+          "package_name": "com.GAM400.fitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928501592567-g3om047p616kj6ihrmhc2uiqlvs3mf48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.GAM400.fitnessapp",
+            "certificate_hash": "5912bde500b64100962bfca0c3eb6c92a192d57b"
+          }
+        },
+        {
+          "client_id": "928501592567-4ie3mjg0mjfim14o27mict71vg02dcp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCILfVKOtR_TEoEC_evMDM1DpiNgJqQJNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928501592567-4ie3mjg0mjfim14o27mict71vg02dcp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:928501592567:android:cfa96ff7d5a54a8673fef2",
         "android_client_info": {
           "package_name": "com.example.flutter_app"
