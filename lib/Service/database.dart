@@ -1,34 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/models/Class.dart';
+import 'package:flutter_app/models/user.dart';
 //import 'package:uuid/uuid.dart';
 
 
 class DatabaseService
 {
-  final String uid;
-  DatabaseService({this.uid});
   final CollectionReference userCollection = Firestore.instance.collection("user");
   final CollectionReference classCollection = Firestore.instance.collection("class");
 
-  Future updateUserData(String name ,  int type,int level)async
+  Future updateClassData(Class classes)async
   {
-    /*
-    //test for creating a unique id.
-    await classCollection.document(Uuid().v4()).setData(
-        {
-          'name': name,
-          'type': type,
-          'level' : level
-        }
-      );
-    */
-      return await userCollection.document(uid).setData
+    return await classCollection.document(classes.uid).setData
       (
-       {
-         'name': name,
-         'type': type,
-         'level' : level
-       }
+        classes.toJson()
+    );
+  }
 
+  Future updateUserData(User user)async
+  {
+      return await userCollection.document(user.uid).setData
+      (
+          user.toJson()
       );
   }
+  Future<User> getUserDataFromFireBase(String uid) async
+  {
+     var doc =  await userCollection.document(uid).get();
+     if(doc != null)
+     {
+        User obj = User(uid: uid);
+        obj.fromJson(doc.data);
+        return obj;
+     }
+      return null;
+  }
+
 }

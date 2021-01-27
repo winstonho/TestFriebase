@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'database.dart';
@@ -10,6 +9,13 @@ class AuthService
 
   User firebaseUserToUser(FirebaseUser user)
   {
+    if(user != null)
+    {
+        User temp =  new  User(uid:user.uid);
+        temp.name = user.displayName != null ? user.displayName :"temp";
+        return temp;
+    }
+
     return user !=null ? User(uid:user.uid) : null;
   }
 
@@ -27,7 +33,6 @@ class AuthService
     try
     {
       AuthResult r = await _auth.signInAnonymously();
-      await DatabaseService(uid :r.user.uid).updateUserData('test', 0, 10);
       return firebaseUserToUser(r.user);
     }
     catch(e)
@@ -75,6 +80,11 @@ class AuthService
   {
     try
     {
+      if(await googleSignIn.isSignedIn() == true)
+        {
+          await googleSignIn.signOut();
+        }
+
       return await _auth.signOut();
     }
     catch(e)
@@ -96,8 +106,7 @@ class AuthService
       idToken: googleSignInAuthentication.idToken,
     );
 
-    final AuthResult authResult = await _auth.signInWithCredential(credential);
-    final  FirebaseUser  user = authResult.user;
+
 
     try
     {
