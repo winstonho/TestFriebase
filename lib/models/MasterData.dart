@@ -1,4 +1,4 @@
-import 'package:flutter_app/Service/database.dart';
+import 'package:flutter_app/Service/databaseService.dart';
 import 'package:flutter_app/models/user.dart';
 
 class MasterData {

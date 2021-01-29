@@ -1,12 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Service/auth.dart';
+import 'package:flutter_app/Service/databaseService.dart';
+import 'package:flutter_app/models/Class.dart';
+import 'package:provider/provider.dart';
+import 'classesList.dart';
 
-    class  Home extends StatelessWidget {
+
+
+class  Home extends StatelessWidget {
       //note to self final also mean const in
       final AuthService _authService = AuthService();
       @override
       Widget build(BuildContext context) {
-        return Scaffold(
+        return
+        StreamProvider<List<Class>>.value
+          (
+          value: DatabaseService().classes,
+          child: Scaffold(
            backgroundColor: Colors.brown[50],
            appBar: AppBar
              (
@@ -23,6 +34,8 @@ import 'package:flutter_app/Service/auth.dart';
                   )
                 ]
              ),
+            body: ClassesList(),
+        )
         );
       }
     }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/Screens/home/classesList.dart';
 import 'package:flutter_app/models/Class.dart';
 import 'package:flutter_app/models/user.dart';
 //import 'package:uuid/uuid.dart';
@@ -34,6 +35,23 @@ class DatabaseService
         return obj;
      }
       return null;
+  }
+
+  List<Class> _ClassesListFromSnapshot(QuerySnapshot snapshot)
+  {
+      return snapshot.documents.map((doc)
+      {
+        Class temp = Class(uid: doc.data['uid']);
+        temp.fromJson(doc.data);
+        return temp;
+      }
+    ).toList();
+  }
+
+
+  Stream<List<Class>> get classes
+  {
+    return classCollection.snapshots().map(_ClassesListFromSnapshot);
   }
 
 }

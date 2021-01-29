@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/Screens/authenticate/authenticate.dart';
 import 'package:flutter_app/Screens/home/home.dart';
 //import 'package:flutter_app/Screens/loginPage2.dart';
-import 'package:flutter_app/Service/database.dart';
+import 'package:flutter_app/Service/databaseService.dart';
 import 'package:flutter_app/models/Class.dart';
 import 'package:flutter_app/models/MasterData.dart';
 import 'package:flutter_app/models/user.dart';

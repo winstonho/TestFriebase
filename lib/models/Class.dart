@@ -30,6 +30,14 @@ class Class
         'instructorID'     : jsonEncode(instructorID),
         'studentID'     : jsonEncode(studentID)
       };
+  void fromJson ( Map<String, dynamic> json)
+  {
+    uid = json['id'] as String;
+    maxSlot = json['maxSlot'] as int;
+    //accountType = json['DateTime'] as int;
+    currentSlot = json['currentSlot'];
+
+  }
 }
 
 
