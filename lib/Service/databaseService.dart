@@ -37,7 +37,7 @@ class DatabaseService
       return null;
   }
 
-  List<Class> _ClassesListFromSnapshot(QuerySnapshot snapshot)
+  List<Class> _classesListFromSnapshot(QuerySnapshot snapshot)
   {
       return snapshot.documents.map((doc)
       {
@@ -51,7 +51,13 @@ class DatabaseService
 
   Stream<List<Class>> get classes
   {
-    return classCollection.snapshots().map(_ClassesListFromSnapshot);
+    return classCollection.snapshots().map(_classesListFromSnapshot);
   }
+
+ // Future<List<Class>> qureMyClass(String uid)
+  //{
+    // Query temp = userCollection.where('instructorID' == uid);
+     //temp.getDocuments();
+  //}
 
 }

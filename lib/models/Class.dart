@@ -36,7 +36,7 @@ class Class
     maxSlot = json['maxSlot'] as int;
     //accountType = json['DateTime'] as int;
     currentSlot = json['currentSlot'];
-
+    instructorID = json['instructorID'] != null ? List.from(jsonDecode(json['instructorID'])) : null;
   }
 }
 
